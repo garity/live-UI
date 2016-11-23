@@ -41,6 +41,7 @@ $(document).ready(function(){
             bounds.extend(marker.position);
         });
         currentMap.fitBounds(bounds);
+
     	counter++;
     });
 
@@ -67,17 +68,17 @@ $(document).ready(function(){
         itineraryData[count + 1] = dayData;
     });
 
-    
+
     //switch day
     $('.day-buttons').on('click', '.day-num', function(e){
         const $button = $(this);
         const $prevButton = $('.current-day');
         const count = $prevButton.text();
         const currNum = $button.text();
-        
+
         $('#day-title').children('span').text(`Day ${currNum}`);
         $('#day-title').children('span').attr('id', currNum);
-        
+
         const $hotels = $('.hotels').children();
         const $restaurants = $('.restaurants').children();
         const $activitys = $('.activitys').children();
@@ -101,12 +102,18 @@ $(document).ready(function(){
         if (itineraryData[currNum].restaurants) $('.restaurants').append(itineraryData[currNum].restaurants);
         if (itineraryData[currNum].activitys) $('.activitys').append(itineraryData[currNum].activitys);
         markers = itineraryData[currNum].markers || [];
-        markers.forEach(function(marker){marker.setMap(currentMap);});
-        var bounds = new google.maps.LatLngBounds();
-        markers.forEach(function(marker){
-            bounds.extend(marker.position);
-        });
-        currentMap.fitBounds(bounds);
+        if (markers.length === 0) {
+            currentMap.center = new google.maps.LatLng(40.705086, -74.009151);
+            currentMap.zoom = 13;
+        }
+        else {
+            markers.forEach(function(marker){marker.setMap(currentMap);});
+            var bounds = new google.maps.LatLngBounds();
+            markers.forEach(function(marker){
+                bounds.extend(marker.position);
+            });
+            currentMap.fitBounds(bounds);
+        }
     });
 
     //remove day
@@ -140,14 +147,20 @@ $(document).ready(function(){
             if (itineraryData[id - 1].restaurants) $('.restaurants').append(itineraryData[id - 1].restaurants);
             if (itineraryData[id - 1].activitys) $('.activitys').append(itineraryData[id - 1].activitys);
             markers = itineraryData[id - 1].markers || [];
-            markers.forEach(function(marker){marker.setMap(currentMap);});
-            var bounds = new google.maps.LatLngBounds();
-        markers.forEach(function(marker){
-            bounds.extend(marker.position);
-        });
-        currentMap.fitBounds(bounds);
+            if (markers.length === 0) {
+            currentMap.center = new google.maps.LatLng(40.705086, -74.009151);
+            currentMap.zoom = 13;
+            }
+            else {
+                markers.forEach(function(marker){marker.setMap(currentMap);});
+                var bounds = new google.maps.LatLngBounds();
+                markers.forEach(function(marker){
+                    bounds.extend(marker.position);
+                });
+                currentMap.fitBounds(bounds);
+            }
         }
-        
+
         //const type = $select.data('type');
     });
 
