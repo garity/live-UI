@@ -120,7 +120,7 @@ $(document).ready(function(){
     $('#day-title').on('click', 'button', function(e){
         const $button = $(this);
         const $span = $button.siblings('span');
-        const id = $span.attr('id');
+        let id = $span.attr('id');
         const siblingCount = $('#day-add').siblings().length;
         const $currDay = $('.current-day');
 
@@ -143,10 +143,15 @@ $(document).ready(function(){
             $('#day-add').prev().remove();
             $('#day-title').children('span').text(`Day ${$prevButton.text() || 1}`);
             $('#day-title').children('span').attr('id', $prevButton.text() || 1);
+
+            //super disgusting code for getting everything to show when you remove day 1
+            if (id === '1') id = 2;
+
             if (itineraryData[id - 1].hotels) $('.hotels').append(itineraryData[id - 1].hotels);
             if (itineraryData[id - 1].restaurants) $('.restaurants').append(itineraryData[id - 1].restaurants);
             if (itineraryData[id - 1].activitys) $('.activitys').append(itineraryData[id - 1].activitys);
             markers = itineraryData[id - 1].markers || [];
+
             if (markers.length === 0) {
                 currentMap.setCenter(new google.maps.LatLng(40.705086, -74.009151));
                 currentMap.setZoom(13);
