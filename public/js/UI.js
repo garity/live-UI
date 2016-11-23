@@ -118,6 +118,7 @@ $(document).ready(function(){
 
     //remove day
     $('#day-title').on('click', 'button', function(e){
+        console.log(markers);
         const $button = $(this);
         const $span = $button.siblings('span');
         let id = $span.attr('id');
@@ -131,6 +132,9 @@ $(document).ready(function(){
 
         if (siblingCount === 1) {
             itineraryData[1] = {};
+            markers = [];
+            currentMap.setCenter(new google.maps.LatLng(40.705086, -74.009151));
+            currentMap.setZoom(13);
         }
         else {
             itineraryData.splice(id, 1);
