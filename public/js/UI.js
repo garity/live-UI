@@ -103,8 +103,8 @@ $(document).ready(function(){
         if (itineraryData[currNum].activitys) $('.activitys').append(itineraryData[currNum].activitys);
         markers = itineraryData[currNum].markers || [];
         if (markers.length === 0) {
-            currentMap.center = new google.maps.LatLng(40.705086, -74.009151);
-            currentMap.zoom = 13;
+            currentMap.setCenter(new google.maps.LatLng(40.705086, -74.009151));
+            currentMap.setZoom(13);
         }
         else {
             markers.forEach(function(marker){marker.setMap(currentMap);});
@@ -148,8 +148,8 @@ $(document).ready(function(){
             if (itineraryData[id - 1].activitys) $('.activitys').append(itineraryData[id - 1].activitys);
             markers = itineraryData[id - 1].markers || [];
             if (markers.length === 0) {
-            currentMap.center = new google.maps.LatLng(40.705086, -74.009151);
-            currentMap.zoom = 13;
+                currentMap.setCenter(new google.maps.LatLng(40.705086, -74.009151));
+                currentMap.setZoom(13);
             }
             else {
                 markers.forEach(function(marker){marker.setMap(currentMap);});
@@ -160,10 +160,6 @@ $(document).ready(function(){
                 currentMap.fitBounds(bounds);
             }
         }
-
-        //const type = $select.data('type');
     });
 
  })
-
-//marker.setMap(null)     to remove markers
