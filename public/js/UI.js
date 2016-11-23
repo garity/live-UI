@@ -118,7 +118,6 @@ $(document).ready(function(){
 
     //remove day
     $('#day-title').on('click', 'button', function(e){
-        console.log(markers);
         const $button = $(this);
         const $span = $button.siblings('span');
         let id = $span.attr('id');
