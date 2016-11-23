@@ -1,5 +1,6 @@
 let drawMarker;
-const markers = [];
+let markers = [];
+let currentMap;
 
 $(function initializeMap (){
 
@@ -36,7 +37,7 @@ $(function initializeMap (){
 
   var mapCanvas = document.getElementById('map-canvas');
 
-  var currentMap = new google.maps.Map(mapCanvas, {
+  currentMap = new google.maps.Map(mapCanvas, {
     center: fullstackAcademy,
     zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
